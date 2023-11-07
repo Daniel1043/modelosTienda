@@ -1,0 +1,15 @@
+git clone url
+cd project
+python3 -m venv venv
+source venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+python manage.py startapp polls
+
+# Exportar datos a fixture e importar
+https://www.coderedcorp.com/blog/how-to-dump-your-django-database-and-load-it-into-/
+python manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission --indent 2 > dump.json
+# migrate
+loaddata fixtures/dump.json
