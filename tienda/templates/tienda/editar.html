@@ -1,0 +1,18 @@
+{% extends 'tienda/base.html' %}
+            		
+{% block content %}
+
+    <h1>Editar Producto</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.nombre }}
+    </form>
+
+    <a href="{% url 'eliminarProducto' pk=pk %}">Eliminar</a>
+    
+{% endblock %}

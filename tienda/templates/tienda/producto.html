@@ -1,0 +1,22 @@
+{% extends 'tienda/base.html' %}
+            			{% block content %}
+                        
+                        <table border="1" >
+                            <tr>
+                                <td>Nombre</td>
+                                <td>Modelo</td>
+                            </tr>
+                         {% for producto in Productos %}
+                         
+                          
+                            <tr>
+                                <td> {{producto.nombre}}</td>
+                                <td> {{producto.modelo}} </td>
+                            </tr>
+                         
+                          
+                          
+                         {% endfor %}
+                        </table>
+                        {% endblock %}
+           
