@@ -2,12 +2,15 @@
             		
 {% block content %}
 
-    <h1>Editar Producto</h1>
+  
+    <h1>Añadir producto</h1>
+    
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Guardar Cambios</button>
+        <button type="submit">Añadir nuevo producto</button>
     </form>
 
+    
     
 {% endblock %}

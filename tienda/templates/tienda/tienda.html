@@ -1,7 +1,12 @@
 {% extends 'tienda/base.html' %}
             			{% block content %}
+                            <form action="{% url 'buscar' %}" method="get">
+                              <input id="inp_search" type="text" placeholder="Buscar producto..." name="producto_buscar" />
+                              <label for="busc"><i></i></label>
+                              <button id="busc" >Buscar..</button>
+                            </form>
 
-                        <div class="orden_recuadros">
+                         <div class="orden_recuadros">
 
                          {% for producto in Productos %}
                              <div class="recuadro_productos">
@@ -14,23 +19,10 @@
                                 <div class="texto"> {{producto.precio}}€</div>
 
                                 </div>
-                                 <br> <br>
 
-                                         <div class="orden_recuadros">
-                                             <button type="action" class="button-30"><a href="{% url 'editarProducto' pk=producto.pk  %}">Editar</a></button>
 
-                                                        <p> </p>
-
-                                             <button type="action" class="button-30"><a href="{% url 'eliminarProducto' pk=producto.pk %}">Eliminar producto</a> </button>
-
-                                         </div>
                              </div>
                          {% endfor %}
 
                        </div>
-
-                            <br><br>
-
-                             <a href="{% url 'añadirProducto'  %}">Nuevo</a>
                         {% endblock %}
-           
