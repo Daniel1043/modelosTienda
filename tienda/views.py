@@ -77,6 +77,7 @@ def loge_ins(request):
                     return redirect('welcome')
                 else:
                     form.add_error(None, 'Usuario no existe')
+                    messages.error(request, "no es")
         else:
             form = iniciar_sesion()
         return render(request, 'tienda/iniciarSesion.html', {'form': form})
