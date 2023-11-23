@@ -7,23 +7,21 @@
                              <div class="recuadro_productos">
                                          <div class="recuadro_imagenes"><img src="https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202210/06/00194612300593____9__640x640.jpg"></div>
 
-                                <div class="orden_recuadros">
+                                <div class="orden_interior_recuadro">
                                     <div class="texto"> {{producto.nombre}}</div>
                                 <div class="texto"> {{producto.modelo}}</div>
                                  <div class="texto">{{producto.marca}}</div>
                                 <div class="texto"> {{producto.precio}}€</div>
 
+                                <div class="texto">  <button type="action" class="button-30"><a href="{% url 'editarProducto' pk=producto.pk  %}">Editar</a></button></div>
+                                
+                                 <div> <button type="action" class="button-30"><a href="{% url 'eliminarProducto' pk=producto.pk %}">Eliminar producto</a> </button></div>
+
                                 </div>
                                  <br> <br>
 
-                                         <div class="orden_recuadros">
-                                             <button type="action" class="button-30"><a href="{% url 'editarProducto' pk=producto.pk  %}">Editar</a></button>
-
-                                                        <p> </p>
-
-                                             <button type="action" class="button-30"><a href="{% url 'eliminarProducto' pk=producto.pk %}">Eliminar producto</a> </button>
-
-                                         </div>
+                                        
+                                         
                              </div>
                          {% endfor %}
 

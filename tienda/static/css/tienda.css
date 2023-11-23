@@ -30,9 +30,20 @@ h1{
 
 /*Producto*/
 .orden_recuadros{
-    display: flex;
-    flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
+
+.orden_interior_recuadro{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 50px);
+  grid-column-gap: 70px;
+}
+
 .recuadro_productos{
     border: 1px solid;
     border-radius: 10px;
