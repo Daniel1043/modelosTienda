@@ -16,8 +16,13 @@
 <div class="page-header">
 		<h1><a class="enlace_base" href="/">Tienda Virtual</a></h1>
 
-         <button type="action" class="button-86"><h3><a class="enlace_base" href="{% url 'loge_ins' %}?next={request.path}">Login</a></h3></button>
-
+		{% if request.user.is_authenticated %}
+			<p>Bienvenido, {{ user.username }}</p>
+			<button type="action" class="button-86"><h3><a class="enlace_base" href="{% url 'cerrar_sesion_view' %}?next={request.path}">LogOut</a></h3></button>
+    	{% else %}
+         <button type="action" class="button-86"><h3><a class="enlace_base" href="{% url 'loge_ins' %}?next={{ request.path }}">Login</a></h3></button>
+		 {% endif %}
+		<div></div>
 </div>
     	<div class="container-fluid">
         	<div class="row">

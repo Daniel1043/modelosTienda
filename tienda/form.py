@@ -1,5 +1,5 @@
 from django import forms
-from .models import Producto
+from .models import Producto,Compra,Marca
 from django.contrib.auth.forms import AuthenticationForm
 
 class cambiarProducto(forms.ModelForm):
@@ -7,6 +7,7 @@ class cambiarProducto(forms.ModelForm):
     class Meta:
         model = Producto
         fields = ['vip','precio','unidades','modelo','nombre','marca']
+
 
 
 
@@ -27,3 +28,25 @@ class iniciar_sesion(AuthenticationForm):
             }
         )
     )
+    next = forms.CharField(widget=forms.HiddenInput, initial="/")
+    
+    
+    
+class comprasForm(forms.ModelForm):
+     class Meta:
+        model = Compra
+        fields = ['unidades']
+
+
+class marcas(forms.ModelForm):
+     class Meta:
+        model = Marca
+        fields = ['nombre',]
+
+
+
+class fitroForm(forms.Form):
+    nombre = forms.CharField(required=False,widget=forms.TextInput({"placeholder": "Search ..."}))
+    marca = forms.ModelMultipleChoiceField(queryset=Marca.objects.all(), required=False, widget=forms.CheckboxSelectMultiple)
+    
+    

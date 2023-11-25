@@ -1,0 +1,18 @@
+{% extends 'tienda/base.html' %}
+            		
+{% block content %}
+
+    <h1>Comprar Producto</h1>
+    <p>{{ producto.nombre }}</p>
+    <p>{{ producto.marca }}</p>
+    <p>{{ producto.modelo }}</p>
+    <p>{{ producto.precio }}€</p>
+    <p>{{ producto.unidades }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit">Comprar</button>
+    </form>
+
+    
+{% endblock %}
