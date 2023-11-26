@@ -1,10 +1,10 @@
 {% extends 'tienda/base.html' %}
             			{% block content %}
-                            <form action="{% url 'buscar' %}" method="get">
-                              <input id="inp_search" type="text" placeholder="Buscar producto..." name="producto_buscar" />
-                              <label for="busc"><i></i></label>
-                              <button id="busc" >Buscar..</button>
-                            </form>
+                        <form method="post">
+                          {% csrf_token %}
+                          {{ filtro_prod.nombre }}
+                          <button type="active">Buscar</button>
+                      </form>
 
                          <div class="orden_recuadros">
 

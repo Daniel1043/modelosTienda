@@ -1,0 +1,30 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+	<h2>Bienvenido a la tienda virtual</h2>
+	<ul>
+		<li> <a href="{% url 'producto_top' %}">Productos top</a> </li>
+        <li> <a href="{% url 'historial_compras' %}">Historial de compras</a> </li>
+        <li> <a href="{% url 'clientesTop' %}">Mejores clientes</a> </li>
+
+	</ul>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ filtro_prod.as_div }}
+        <button type="active">Buscar</button>
+    </form>
+        {% for producto in Productos %}
+
+            
+    
+            <div class="texto"> {{producto.nombre}}</div>
+                <div class="texto"> {{producto.modelo}}</div>
+                <div class="texto">{{producto.marca}}</div>
+                <div class="texto"> {{producto.precio}}€</div>
+
+        
+        {% endfor %}
+
+    
+{% endblock %}

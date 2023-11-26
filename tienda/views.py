@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.decorators import user_passes_test
+from django.db.models import Count, Sum
 
 
 
@@ -18,24 +19,39 @@ from django.contrib.auth.decorators import user_passes_test
 def welcome(request):
     return render(request,'tienda/index.html', {})
 
-#Enlazara con la pagina tienda y mostrara una lista de los productos que ya existen
-def tienda(request):
-    filtro_prod=fitroForm()
+def info(request):
     productos=Producto.objects.all()
+    filtro_prod=fitroForm()
 
     if request.method == "POST":
         filtro_prod = fitroForm(request.POST)
         if filtro_prod.is_valid():
             nombre= filtro_prod.cleaned_data['nombre']
             marca =filtro_prod.cleaned_data['marca']
-            print(marca)
             
-            productos = productos.filter(nombre___icontains=nombre)
+            productos = productos.filter(nombre__contains=nombre)
             if marca:
                 productos= productos.filter(marca__id__in=marca)
-                
+
     form = comprasForm()
-    return render(request, 'tienda/tienda.html', {'Productos':productos,'form':form})
+    return render(request,'tienda/info.html', {'Productos':productos,'filtro_prod':filtro_prod,'form':form})
+
+#Enlazara con la pagina tienda y mostrara una lista de los productos que ya existen
+def tienda(request):
+    productos=Producto.objects.all()
+    form = comprasForm()
+    filtro_prod=fitroForm()
+
+    if request.method == "POST":
+        filtro_prod = fitroForm(request.POST)
+        if filtro_prod.is_valid():
+            nombre= filtro_prod.cleaned_data['nombre']
+            
+            productos = productos.filter(nombre__contains=nombre)
+            if marca:
+                productos= productos.filter(marca__id__in=marca)
+
+    return render(request, 'tienda/tienda.html', {'Productos':productos,'form':form,'filtro_prod':filtro_prod})
 
 
 
@@ -138,7 +154,7 @@ def cliente_check(user):
 @user_passes_test(cliente_check, login_url='welcome')
 def comprarProducto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
-
+    compra = Compra()
     if request.method == "POST":
         form = comprasForm(request.POST)
         if form.is_valid():
@@ -155,9 +171,35 @@ def comprarProducto(request, pk):
                 compra.importe= unidades*producto.precio
                 compra.fecha= timezone.now()
                 compra.save()
+                importe_total=compra.importe
                 cliente.saldo -=compra.importe
                 cliente.save()
                 messages.info(request, "Compra finalizada")
                 return redirect('welcome')
     form = comprasForm()            
     return render(request, 'tienda/checkout.html', {'form': form, 'producto': producto})
+
+
+
+
+
+@login_required(login_url='loge_ins')
+@staff_member_required
+def producto_top(request):
+    producto_top = Producto.objects.annotate(sum_unidades=Sum('compra__unidades'), sum_importes=Sum('compra__importe')).order_by('-sum_unidades')[:10]
+    return render(request, 'tienda/productoTop.html', {'producto_top': producto_top})
+
+
+@login_required(login_url='loge_ins')
+@user_passes_test(cliente_check, login_url='welcome')
+def historial_compras(request):
+    cliente = get_object_or_404(Cliente, user=request.user)
+    compras = Compra.objects.all().filter(producto__compra__user_id=cliente)
+    return render(request, 'tienda/historialC.html', {'compras': compras})
+
+
+@login_required(login_url='loge_ins')
+@staff_member_required
+def clientesTop(request):
+    top_cliente = Cliente.objects.annotate(dinero_gastado=Sum('compra__importe')).order_by('-dinero_gastado')[:3]
+    return render(request, 'tienda/clientesTop.html', {'top_clientes': top_cliente})
