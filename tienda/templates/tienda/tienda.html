@@ -12,22 +12,21 @@
                              <div class="recuadro_productos">
                                          <div class="recuadro_imagenes"><img src="https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202210/06/00194612300593____9__640x640.jpg"></div>
 
-                                <div class="orden_interior_recuadro">
-                                            <div class="texto"> {{producto.nombre}}</div>
-                                        <div class="texto"> {{producto.modelo}}</div>
-                                        <div class="texto">{{producto.marca}}</div>
-                                        <div class="texto"> {{producto.precio}}€</div>
-                                        <div class="texto"> {{producto.unidades}}</div>
+                               
+                                            <div class="texto_tienda_nombre"> {{producto.nombre}}   {{producto.modelo}}</div>
+                                        
+                                        <div class="ordenFlex">
+                                           
+                                            <div class="texto_tienda_precio"> {{producto.precio}}€</div>
 
-                                  <div class="texto">   
+                                            <div class="texto_boton">   
 
-                                      <button type="action" class="button-30"><a href="{% url 'comprarProducto' pk=producto.pk  %}">Comprar</a></button>
-                                    
-                                  </div>
-                            
-                                </div>
+                                                <button type="action" class="button-30"><a href="{% url 'comprarProducto' pk=producto.pk  %}">Comprar</a></button>
+                                              
+                                            </div>
+                                        </div>
 
-
+                                  
                              </div>
                          {% endfor %}
 

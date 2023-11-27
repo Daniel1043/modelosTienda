@@ -1,37 +1,45 @@
 {% extends 'tienda/base.html' %}
             			{% block content %}
 
-                        <div class="orden_recuadros">
+                        <table border="1" class="tablaOrden"  cellspacing="1"  >
+
+                            <tr class="colorTrEntrada">
+                                <td class="texto"> Nombre</td>
+                                <td class="texto"> Marca</td>
+                                <td class="texto">Modelo</td>
+                                <td class="texto"> Precio </td>
+                                <td class="texto"> Unidades</td>
+                                <td class="texto"> Editar</td>
+                                <td class="texto"> Eliminar</td>
+                                <td class="texto"> Añadir</td>
+                            </tr>
+                            
 
                          {% for producto in Productos %}
-                             <div class="recuadro_productos">
-                                         <div class="recuadro_imagenes"><img src="https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202210/06/00194612300593____9__640x640.jpg"></div>
 
-                                <div class="orden_interior_recuadro">
-                                    
-                                        <div class="texto"> {{producto.nombre}}</div>
-                                    <div class="texto"> {{producto.modelo}}</div>
-                                    <div class="texto">{{producto.marca}}</div>
-                                    <div class="texto"> {{producto.precio}}€</div>
+                             <tr> 
 
-                                    <div class="texto">  
-                                        <button type="action" class="button-30"><a href="{% url 'editarProducto' pk=producto.pk  %}">Editar</a></button>
-                                    </div>
+                                <td class="texto" > {{producto.nombre}}</td>
+                                <td class="texto">{{producto.marca}}</td>
+                                <td class="texto"> {{producto.modelo}}</td>
+                                <td class="texto"> {{producto.precio}}€</td>
+                                <td class="texto"> {{producto.unidades}}</td>
+
+                                    <td>  
+                                        <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'editarProducto' pk=producto.pk  %}">Editar</a></button>
+                                    </td>
                                 
-                                    <div> <button type="action" class="button-30"><a href="{% url 'eliminarProducto' pk=producto.pk %}">Eliminar producto</a> </button></div>
+                                    <td> <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'eliminarProducto' pk=producto.pk %}">Eliminar producto</a> </button></td>
 
-                                </div>
-                                 <br> <br>
+                                    <td> <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'añadirProducto' %}">Añadir producto</a> </button></td>
+                                
 
                                         
                                          
-                             </div>
+                             </tr>
                          {% endfor %}
 
-                       </div>
+                       </table>
 
-                            <br><br>
-
-                             <a href="{% url 'añadirProducto'  %}">Nuevo</a>
                         {% endblock %}
            

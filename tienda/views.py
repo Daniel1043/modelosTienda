@@ -46,6 +46,7 @@ def tienda(request):
         filtro_prod = fitroForm(request.POST)
         if filtro_prod.is_valid():
             nombre= filtro_prod.cleaned_data['nombre']
+            marca =filtro_prod.cleaned_data['marca']
             
             productos = productos.filter(nombre__contains=nombre)
             if marca:
@@ -151,7 +152,7 @@ def cliente_check(user):
 
 @transaction.atomic
 @login_required(login_url='loge_ins')
-@user_passes_test(cliente_check, login_url='loge_ins')
+@user_passes_test(cliente_check, login_url='welcome')
 def comprarProducto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     compra = Compra()

@@ -38,15 +38,10 @@ class comprasForm(forms.ModelForm):
         fields = ['unidades']
 
 
-class marcas(forms.ModelForm):
-     class Meta:
-        model = Marca
-        fields = ['nombre',]
-
 
 
 class fitroForm(forms.Form):
-    nombre = forms.CharField(required=False,widget=forms.TextInput({"placeholder": "Search ..."}))
+    nombre = forms.CharField(required=False,widget=forms.TextInput({"placeholder": "Buscar. . ."}))
     marca = forms.ModelMultipleChoiceField(queryset=Marca.objects.all(), required=False, widget=forms.CheckboxSelectMultiple)
     
     

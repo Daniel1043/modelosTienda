@@ -13,20 +13,21 @@
     <link rel="stylesheet" href="{% static 'css/tienda.css' %}">
 </head>
 <body>
-<div class="page-header">
+<div class="page_header">
 		<h1><a class="enlace_base" href="/">Tienda Virtual</a></h1>
 
 		{% if request.user.is_authenticated %}
-			<p>Bienvenido, {{ user.username }}</p>
-			<button type="action" class="button-86"><h3><a class="enlace_base" href="{% url 'cerrar_sesion_view' %}?next={request.path}">LogOut</a></h3></button>
+			<div class="mensajeausuario"> Bienvenido, {{ user.username }}</div>
+			<div> <button type="action" class="button-86"><h3><a class="enlace_base" href="{% url 'cerrar_sesion_view' %}">LogOut</a></h3></button></div>
     	{% else %}
-         <button type="action" class="button-86"><h3><a class="enlace_base" href="{% url 'loge_ins' %}?next={{ request.path }}">Login</a></h3></button>
-		 {% endif %}
-		<div></div>
+			<div class="mensajeausuario"> No se ha iniciado sesion</div>
+            <div> <button type="action" class="button-86"><h3><a class="enlace_base" href="{% url 'loge_ins' %}?next={{ request.path }}">Login</a></h3></button> </div>
+		{% endif %}
+		
 </div>
     	<div class="container-fluid">
-        	<div class="row">
-            		<div class="col">
+        	<div>
+            		<div>
             			{% block content %}
             			{% endblock %}
             		</div>

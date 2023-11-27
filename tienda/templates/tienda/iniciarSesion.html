@@ -1,8 +1,16 @@
 {% extends 'tienda/base.html' %}
    {% block content %}
-                     <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_div }}
-                        <button type="submit">Iniciar sesion</button>
-                    </form>
+      <center> <h1>Iniciar sesion</h1> </center>
+      <div class="recuadro_iniciarSesion">
+
+      <form method="post">
+         {% csrf_token %}
+         <br><br>
+         <div class="texto_iniciarSesion">Introduzca su nombre{{form.username}}</div>
+         <div class="texto_iniciarSesion">Introduzca su contraseña{{form.password}}</div>
+         <div class="texto_iniciarSesion">{{form.next}}</div>
+         <br>
+         <center> <button type="submit" class="button-30">Iniciar sesion</button> </center>
+      </form>
+      </div>
  {% endblock %}

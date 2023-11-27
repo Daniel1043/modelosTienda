@@ -1,18 +1,33 @@
+body{
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
-.page-header{
-    height: 120px;
+}
+.page_header{
+    height: 150px;
      box-shadow: 4px 5px 5px 5px black;
     margin-bottom: 20px;
     margin-right: 10px;
     margin-left: 10px;
-    background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(2,0,36,1) 2%, rgba(53,184,153,1) 31%, rgba(71,251,195,1) 35%, rgba(0,212,255,1) 100%);
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: row;
-    margin-top: 30px;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-content: flex-end;
 
 }
+
+.mensajeausuario{
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: 100px;
+  margin-right: auto;
+}
+
 
 h1{
     font-size: 80px;
@@ -26,57 +41,6 @@ h1{
 
 .enlace_base:hover{
     color: #d46767;
-}
-
-/*Producto*/
-.orden_recuadros{
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-}
-
-.orden_interior_recuadro{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 50px);
-  grid-column-gap: 70px;
-}
-
-.recuadro_productos{
-    border: 1px solid;
-    border-radius: 10px;
-    box-shadow: 4px 2px 2px black;
-    height: 500px;
-    width: 350px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-right: 30px;
-
-}
-
-.recuadro_imagenes{
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    width: auto;
-    height: 300px;
-}
-
-    .recuadro_imagenes img{
-        width: 100%;
-        height: auto;
-         object-fit: cover;
-            border-bottom: 1px solid #1b1b1b;
-
-    }
-
-
-
-.texto{
-    margin-top: 30px;
-    padding: 5px;
-    text-align: left;
 }
 
 
@@ -93,7 +57,6 @@ h1{
   box-sizing: border-box;
   color: #36395A;
   cursor: pointer;
-  display: inline-flex;
   font-family: "JetBrains Mono",monospace;
   height: 48px;
   justify-content: center;
@@ -103,7 +66,6 @@ h1{
   padding-left: 16px;
   padding-right: 16px;
   position: relative;
-  text-align: left;
   text-decoration: none;
   transition: box-shadow .15s,transform .15s;
   user-select: none;
@@ -112,6 +74,7 @@ h1{
   white-space: nowrap;
   will-change: box-shadow,transform;
   font-size: 18px;
+
 }
 
 .button-30:focus {
@@ -140,7 +103,7 @@ h1{
   color: #f0f0f0;
   cursor: pointer;
   z-index: 1;
-  padding: 10px 20px;
+  padding: 20px 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,8 +111,9 @@ h1{
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-    margin-left: 1200px;
-    margin-top: 40px;
+  align-self: flex-end;
+  margin-top: 40px;
+  margin-right: 100px;
 }
 
 .button-86::after,
@@ -197,3 +161,234 @@ h1{
   transition: 0s;
   transform: translate(0, 5%);
 }
+
+/*-----------------index--------------*/
+
+.titulo_tienda{
+  font-size: 50px;
+  font-weight: bold;
+  text-decoration:dashed;
+}
+
+.titulo_tienda:hover{
+  transition: 3s;
+  font-size: 70px;
+  font-weight: bold;
+
+}
+
+.texto_entrada_enlaces{
+  text-decoration: none;
+  color:#1b1b1b;
+  font-size: 30px;
+}
+
+/*----iniciarsesion-----*/
+
+.texto_iniciarSesion{
+  margin-top: 10px;
+  padding: 5px;
+  text-align: left;
+  font-size: 20px;
+  width: 400px;
+  margin-left: 150px;
+
+}
+
+.recuadro_iniciarSesion{
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 4px 2px 2px black;
+  height: 40%;
+  width: 40%;
+  padding: 20px;
+  margin-top: 20px;
+  margin-left: 550px;
+
+}
+
+/*------producto--------*/
+
+.tablaOrden{
+  text-align: center;
+  align-items: center;
+  border-collapse: collapse;
+  width:100%;
+  height:20%;
+  box-shadow: 4px 2px 2px black;
+}
+
+.colorTrEntrada{
+  background-color: #d46767;
+}
+
+.colorTr{
+  background-color: rgb(255, 255, 255);
+}
+
+
+.texto{
+  margin-top: 30px;
+  padding: 5px;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+/*--------Editar----------*/
+
+.recuadro_editar{
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 4px 2px 2px black;
+  height: 600px;
+  width: 500px;
+  padding: 20px;
+  margin-top: 20px;
+  margin-left: 700px;
+
+}
+
+.texto_edicion{
+  margin-top: 30px;
+  padding: 5px;
+  text-align: center;
+  font-size: 20px;
+}
+
+
+
+/*----Tienda-----*/
+.orden_recuadros{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+
+.recuadro_productos{
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 4px 2px 2px black;
+    height: 500px;
+    width: 350px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-right: 30px;
+
+}
+
+.recuadro_imagenes{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: auto;
+    height: 300px;
+}
+
+.recuadro_imagenes img{
+        width: 100%;
+        height: auto;
+         object-fit: cover;
+            border-bottom: 1px solid #1b1b1b;
+
+}
+
+.ordenFlex{
+display: flex;
+flex-direction: row;
+
+}
+
+.texto_tienda_nombre{
+      margin-top: 30px;
+      text-align: left;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+
+.texto_tienda_precio{
+      margin-top: 30px;
+      text-align: left;
+      font-size: 40px;
+      color: #d46767;
+    }
+
+.texto_boton{
+  margin-top: 35px;
+  margin-left: 60px;
+}
+
+/*----comprar------*/
+
+.recuadro_editar{
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 4px 2px 2px black;
+  height: 630px;
+  width: 500px;
+  padding: 20px;
+  margin-top: 20px;
+  margin-left: 700px;
+
+}
+
+.texto_compra{
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  margin-left: 120px;
+  padding: 5px;
+  text-align: center;
+  font-size: 30px;
+
+}
+
+.texto_comprar{
+  margin-top: 10px;
+  padding: 5px;
+  text-align: left;
+  font-size: 20px;
+  width: 400px;
+  margin-left: 110px;
+  
+}
+
+.colorRojo{
+  color: rgb(223, 130, 69,51);
+  font-weight: bold;
+}
+
+/*----Compra terminada------*/
+
+.recuadro_compraFin{
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 4px 2px 2px black;
+  height: 500px;
+  width: 500px;
+  padding: 20px;
+  margin-top: 20px;
+
+}
+
+.texto_compra_Fin{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 5px;
+  text-align: left;
+
+}
+
+.fechaCompra{
+  font-size: 30px;
+}
+
+.texto_compra_fin{
+  font-weight: bold;
+  font-size: 35px;
+}
+

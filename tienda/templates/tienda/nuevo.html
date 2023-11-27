@@ -3,14 +3,22 @@
 {% block content %}
 
   
-    <h1>Añadir producto</h1>
+    <center> <h1>Añadir producto</h1> </center> 
     
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Añadir nuevo producto</button>
-    </form>
+    <div class="recuadro_editar">
 
+        <form method="post">
+            {% csrf_token %}
+            <div class="texto_edicion">Nombre: {{form.nombre}}</div>
+            <div class="texto_edicion">Marca: {{form.marca}}</div>
+            <div class="texto_edicion"> Modelo: {{form.modelo}}</div>
+            <div class="texto_edicion"> Precio: {{form.precio}}€</div>
+            <div class="texto_edicion"> Unidade: {{form.unidades}}</div>
+            <div class="texto_edicion"> Vip: {{form.vip}}</div>
+            <br>
+            <center> <button type="submit" class="button-30">Añadir nuevo Producto</button> </center>
+        </form>
+    </div>
     
     
 {% endblock %}

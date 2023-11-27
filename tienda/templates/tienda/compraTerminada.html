@@ -2,9 +2,16 @@
 
 {% block content %}
 
-    <h1>Comprar Producto</h1>
-    <p>{{ compra.fecha }}</p>
-    <p>{{ producto.precio }}€ * {{ compra.unidades }} = {{ importe }}</p>
+    <h1>FIN compra</h1>
+        <div class="recuadro_compraFin">
+            <div class="texto_compra_Fin">
+                <div class="fechaCompra"> {{ compra.fecha }} </div>
+                <div class="texto_compra_fin">Precio del producto {{ producto.precio }}€  </div>
+                <div class="texto_compra_fin">Unidades compradas {{ compra.unidades }} </div>
+                <div class="texto_compra_fin">Precio Final {{ importe }} </div>
+
+            </div>
+        </div>
     <h2>Gracias por su compra</h2>
 
 
