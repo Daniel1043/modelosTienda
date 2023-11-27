@@ -151,7 +151,7 @@ def cliente_check(user):
 
 @transaction.atomic
 @login_required(login_url='loge_ins')
-@user_passes_test(cliente_check, login_url='welcome')
+@user_passes_test(cliente_check, login_url='loge_ins')
 def comprarProducto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     compra = Compra()
@@ -162,7 +162,7 @@ def comprarProducto(request, pk):
                
             if unidades <= producto.unidades:
                 cliente = get_object_or_404(Cliente, user=request.user)
-                producto.unidades-= unidades
+                producto.unidades -= unidades
                 producto.save()
                 compra = Compra()
                 compra.producto= producto
@@ -171,16 +171,23 @@ def comprarProducto(request, pk):
                 compra.importe= unidades*producto.precio
                 compra.fecha= timezone.now()
                 compra.save()
-                importe_total=compra.importe
                 cliente.saldo -=compra.importe
                 cliente.save()
                 messages.info(request, "Compra finalizada")
-                return redirect('welcome')
+                return redirect('compraRealizada', pk=compra.pk)
     form = comprasForm()            
     return render(request, 'tienda/checkout.html', {'form': form, 'producto': producto})
 
 
 
+@transaction.atomic
+@login_required(login_url='loge_ins')
+@user_passes_test(cliente_check, login_url='loge_ins')
+def compraRealizada(request, pk):
+    compra = Compra.objects.get(pk=pk)
+    producto = compra.producto
+    importe = compra.unidades * producto.precio
+    return render(request, 'tienda/compraTerminada.html', {'producto': producto, 'compra': compra, 'importe': importe})
 
 
 @login_required(login_url='loge_ins')
@@ -194,7 +201,7 @@ def producto_top(request):
 @user_passes_test(cliente_check, login_url='welcome')
 def historial_compras(request):
     cliente = get_object_or_404(Cliente, user=request.user)
-    compras = Compra.objects.all().filter(producto__compra__user_id=cliente)
+    compras = Compra.objects.all().filter(producto__compra__user_id=cliente).order_by('-fecha')[:10]
     return render(request, 'tienda/historialC.html', {'compras': compras})
 
 
