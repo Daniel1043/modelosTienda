@@ -136,14 +136,13 @@ def cliente_check(user):
 @user_passes_test(cliente_check, login_url='welcome')
 def comprarProducto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
-    compra = Compra()
     if request.method == "POST":
         form = comprasForm(request.POST)
         if form.is_valid():
             unidades = form.cleaned_data['unidades']
 
             if unidades <= producto.unidades:
-                cliente = get_object_or_404(Cliente, user=request.user)
+                cliente = Cliente.objects.get(user=request.user)
                 producto.unidades -= unidades
                 producto.save()
                 compra = Compra()
@@ -194,14 +193,12 @@ def info(request):
 
 
 
-#--------------------------------------------------------------------------------------------------
-
 
 @login_required(login_url='loge_ins')
 @staff_member_required
 def producto_top(request):
     producto_top = Producto.objects.annotate(sum_unidades=Sum('compra__unidades'), sum_importes=Sum('compra__importe')).order_by('-sum_unidades')[:10]
-    return render(request, 'tienda/productoTop.html', {'producto_top': producto_top})
+    return render(request, 'tienda/info.html', {'producto_top': producto_top})
 
 
 @login_required(login_url='loge_ins')
@@ -209,11 +206,11 @@ def producto_top(request):
 def historial_compras(request):
     cliente = get_object_or_404(Cliente, user=request.user)
     compras = Compra.objects.all().filter(producto__compra__user_id=cliente).order_by('-fecha')[:10]
-    return render(request, 'tienda/historialC.html', {'compras': compras})
+    return render(request, 'tienda/info.html', {'compras': compras})
 
 
 @login_required(login_url='loge_ins')
 @staff_member_required
 def clientesTop(request):
     top_cliente = Cliente.objects.annotate(dinero_gastado=Sum('compra__importe')).order_by('-dinero_gastado')[:3]
-    return render(request, 'tienda/clientesTop.html', {'top_clientes': top_cliente})
+    return render(request, 'tienda/info.html', {'top_clientes': top_cliente})

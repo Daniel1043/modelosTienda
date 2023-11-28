@@ -3,21 +3,28 @@
 {% block content %}
 	<div class="titulo_tienda">Información</div>
 	<ul>
-            <li> <a class="texto_entrada_enlaces" href="{% url 'producto_top' %}">Productos top</a> </li>
-            <li> <a class="texto_entrada_enlaces" href="{% url 'clientesTop' %}">Mejores clientes</a> </li>
+
         {% if request.user.is_staff %}
+                <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'producto_top'  %}">Productos top</a></button>
+                <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'clientesTop'  %}">Mejores clientes</a></button>
             {% else  %}
-            <li> <a class="texto_entrada_enlaces" href="{% url 'historial_compras' %}">Historial de compras</a> </li>
+                <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'historial_compras'  %}">Historial de compras</a></button>
         {% endif %}
+
+        <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'info'  %}">Todos los productos</a></button>
 
 
 	</ul>
     <br>
+
+ {% if Productos %}
         <form method="post">
             {% csrf_token %}
            <div class="checkbox-container"> {{ filtro_prod.as_div }}</div>
             <button type="active" class="myButton">Buscar</button>
         </form>
+
+
        <table border="1" class="tablaOrden"  cellspacing="1"  >
 
                             <tr class="colorTrEntrada">
@@ -43,6 +50,99 @@
                          {% endfor %}
 
                        </table>
+    {% endif %}
 
+
+       {% if producto_top %}
+          <table border="1" class="tablaOrden"  cellspacing="1"  >
+
+                            <tr class="colorTrEntrada">
+                                <td class="texto"> Nombre</td>
+                                <td class="texto"> Marca</td>
+                                <td class="texto">Modelo</td>
+                                <td class="texto"> Total compras</td>
+                                <td class="texto"> Total gastado</td>
+                            </tr>
+
+
+                         {% for producto in producto_top %}
+                            {% if producto.sum_unidades %}
+                                <tr>
+                                    <td class="texto" > {{producto.nombre}}</td>
+                                    <td class="texto">{{producto.marca}}</td>
+                                    <td class="texto"> {{producto.modelo}}</td>
+                                    <td class="texto"> {{producto.sum_unidades}}</td>
+                                    <td class="texto"> {{producto.sum_importes}}€</td>
+                                </tr>
+
+                            {% endif %}
+
+                         {% endfor %}
+
+                       </table>
+    {% endif %}
+
+      {% if top_clientes %}
+                        <table border="1" class="tablaOrden"  cellspacing="1"  >
+
+                            <tr class="colorTrEntrada">
+                                <td class="texto"> Cliente</td>
+                                <td class="texto"> Total gastado</td>
+                            </tr>
+
+
+                         {% for cliente in top_clientes %}
+                            {% if top_clientes %}
+                                <tr>
+                                    <td class="texto" > {{cliente.user.username }}</td>
+                                    <td class="texto">{{ cliente.dinero_gastado|floatformat:2}}€</td>
+                                </tr>
+
+                            {% endif %}
+
+                         {% endfor %}
+
+                       </table>
+    {% endif %}
+
+
+
+      {% if compras %}
+
+                        <table border="1" class="tablaOrden"  cellspacing="1"  >
+
+                            <tr class="colorTrEntrada">
+                                <td class="texto"> Nombre</td>
+                                <td class="texto"> Marca</td>
+                                <td class="texto">Modelo</td>
+                                <td class="texto"> Total gastado </td>
+                                <td class="texto"> Unidades compradas</td>
+                                <td class="texto"> Fecha de compra</td>
+
+                            </tr>
+
+
+                         {% for compra in compras %}
+
+                             <tr>
+
+                                <td class="texto" > {{compra.producto.nombre}}</td>
+                                <td class="texto">{{compra.producto.marca}}</td>
+                                <td class="texto"> {{compra.producto.modelo}}</td>
+                                <td class="texto"> {{compra.importe}}€</td>
+                                <td class="texto"> {{compra.unidades}}</td>
+                                 <td class="texto"> {{compra.fecha  }}</td>
+
+
+
+
+
+
+
+                             </tr>
+                         {% endfor %}
+
+                       </table>
+    {% endif %}
     
 {% endblock %}
