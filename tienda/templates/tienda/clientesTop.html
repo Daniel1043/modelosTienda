@@ -1,11 +1,27 @@
 {% extends 'tienda/base.html' %}
 
 {% block content %}
-    <h3>Mejores Clientes</h3>
-    <ul>
-        {% for cliente in top_clientes %}
-            <li>{{ cliente.user.username }}, ha gastado: {{ cliente.dinero_gastado|floatformat:2 }}</li>
-        {% endfor %}
-    </ul>
+    <div class="titulo_tienda">Mejores Clientes</div>
+
+       <table border="1" class="tablaOrden"  cellspacing="1"  >
+
+                            <tr class="colorTrEntrada">
+                                <td class="texto"> Cliente</td>
+                                <td class="texto"> Total gastado</td>
+                            </tr>
+
+
+                         {% for cliente in top_clientes %}
+                            {% if top_clientes %}
+                                <tr>
+                                    <td class="texto" > {{cliente.user.username }}</td>
+                                    <td class="texto">{{ cliente.dinero_gastado|floatformat:2}}</td>
+                                </tr>
+
+                            {% endif %}
+
+                         {% endfor %}
+
+                       </table>
 
 {% endblock %}

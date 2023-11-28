@@ -1,30 +1,48 @@
 {% extends 'tienda/base.html' %}
 
 {% block content %}
-	<h2>Bienvenido a la tienda virtual</h2>
+	<div class="titulo_tienda">Información</div>
 	<ul>
-		<li> <a href="{% url 'producto_top' %}">Productos top</a> </li>
-        <li> <a href="{% url 'historial_compras' %}">Historial de compras</a> </li>
-        <li> <a href="{% url 'clientesTop' %}">Mejores clientes</a> </li>
+            <li> <a class="texto_entrada_enlaces" href="{% url 'producto_top' %}">Productos top</a> </li>
+            <li> <a class="texto_entrada_enlaces" href="{% url 'clientesTop' %}">Mejores clientes</a> </li>
+        {% if request.user.is_staff %}
+            {% else  %}
+            <li> <a class="texto_entrada_enlaces" href="{% url 'historial_compras' %}">Historial de compras</a> </li>
+        {% endif %}
+
 
 	</ul>
+    <br>
+        <form method="post">
+            {% csrf_token %}
+           <div class="checkbox-container"> {{ filtro_prod.as_div }}</div>
+            <button type="active" class="myButton">Buscar</button>
+        </form>
+       <table border="1" class="tablaOrden"  cellspacing="1"  >
 
-    <form method="post">
-        {% csrf_token %}
-        {{ filtro_prod.as_div }}
-        <button type="active">Buscar</button>
-    </form>
-        {% for producto in Productos %}
+                            <tr class="colorTrEntrada">
+                                <td class="texto"> Nombre</td>
+                                <td class="texto"> Marca</td>
+                                <td class="texto">Modelo</td>
+                                <td class="texto"> Precio </td>
+                                <td class="texto"> Unidades</td>
+                            </tr>
 
-            
-    
-            <div class="texto"> {{producto.nombre}}</div>
-                <div class="texto"> {{producto.modelo}}</div>
-                <div class="texto">{{producto.marca}}</div>
-                <div class="texto"> {{producto.precio}}€</div>
 
-        
-        {% endfor %}
+                         {% for producto in Productos %}
+
+                             <tr>
+
+                                <td class="texto" > {{producto.nombre}}</td>
+                                <td class="texto">{{producto.marca}}</td>
+                                <td class="texto"> {{producto.modelo}}</td>
+                                <td class="texto"> {{producto.precio}}€</td>
+                                <td class="texto"> {{producto.unidades}}</td>
+
+                             </tr>
+                         {% endfor %}
+
+                       </table>
 
     
 {% endblock %}
