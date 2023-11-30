@@ -14,13 +14,20 @@
          <div class="texto_compra"> El producto es vip</div>
         {% endif %}
         <center> 
-        <form method="post">
-            {% csrf_token %}
-            <div class="texto_comprar"> Unidades a comprar: {{ form.unidades }}</div>
-            <br>
-            <button type="submit"  class="button-30">Comprar</button>
-        </form>
-        </center>
+            {% if request.user.is_staff %}
+
+            {% else %}
+                <center> 
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="texto_comprar"> Unidades a comprar: {{ form.unidades }}</div>
+                        <br>
+                        <button type="submit"  class="button-30">Comprar</button>
+                    </form>
+                </center>
+             {% endif %}
+      
+        
     </div>
     
 {% endblock %}

@@ -2,7 +2,7 @@
             			{% block content %}
                         <form method="post">
                           {% csrf_token %}
-                          {{ filtro_prod.nombre }}
+                          {{ filtro_prod.as_div }}
                           <button type="active" class="myButton ">Buscar</button>
                       </form>
 
@@ -18,14 +18,13 @@
                                         <div class="ordenFlex">
                                            
                                             <div class="texto_tienda_precio"> {{producto.precio}}€</div>
-                                            {% if request.user.is_staff %}
-                                                {% else %}
+                                            
                                                 <div class="texto_boton">
 
                                                     <button type="action" class="button-30"><a class="texto_tienda_enlaces" href="{% url 'comprarProducto' pk=producto.pk  %}">Comprar</a></button>
 
                                                 </div>
-                                            {% endif %}
+                                           
                                         </div>
 
                                   

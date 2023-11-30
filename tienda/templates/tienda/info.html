@@ -4,14 +4,11 @@
 	<div class="titulo_tienda">Información</div>
 	<ul>
 
-        {% if request.user.is_staff %}
-                <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'producto_top'  %}">Productos top</a></button>
-                <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'clientesTop'  %}">Mejores clientes</a></button>
-            {% else  %}
-                <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'historial_compras'  %}">Historial de compras</a></button>
-        {% endif %}
-
-        <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'info'  %}">Todos los productos</a></button>
+       
+            <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'producto_top'  %}">Productos top</a></button>
+            <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'clientesTop'  %}">Mejores clientes</a></button>
+            <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'historial_compras'  %}">Historial de compras</a></button>
+            <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'info'  %}">Todos los productos</a></button>
 
 
 	</ul>

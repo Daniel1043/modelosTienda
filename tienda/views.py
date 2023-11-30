@@ -133,7 +133,6 @@ def cliente_check(user):
 
 @transaction.atomic #Es un decorador que se utiliza para garantizar que un bloque de código se ejecute en una transacción de base de datos atómica.
 @login_required(login_url='loge_ins')
-@user_passes_test(cliente_check, login_url='welcome')
 def comprarProducto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     if request.method == "POST":
@@ -175,6 +174,9 @@ def compraRealizada(request, pk):
 
 
 #En info mostraremos todos los productos, podremos buscarlos y marcalos según su marca y nombre, es igual al anterior view de tienda
+
+@login_required(login_url='loge_ins')
+@staff_member_required
 def info(request):
     productos=Producto.objects.all()
     filtro_prod=fitroForm()
@@ -202,10 +204,10 @@ def producto_top(request):
 
 
 @login_required(login_url='loge_ins')
-@user_passes_test(cliente_check, login_url='welcome')
+@staff_member_required
 def historial_compras(request):
-    cliente = get_object_or_404(Cliente, user=request.user)
-    compras = Compra.objects.all().filter(producto__compra__user_id=cliente).order_by('-fecha')[:10]
+    cliente = get_object_or_404(Cliente)
+    compras = Compra.objects.all().filter(producto__compra__user_id=cliente).annotate(Count('fecha', distinct=True)).order_by('-fecha')[:10]
     return render(request, 'tienda/info.html', {'compras': compras})
 
 

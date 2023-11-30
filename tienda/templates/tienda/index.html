@@ -6,8 +6,8 @@
 
         {% if request.user.is_staff %}
             <li> <a class="texto_entrada_enlaces" href="{% url 'productos' %}">Gestión de productos</a> </li>
+			<li><a   class="texto_entrada_enlaces" href="{% url 'info' %}">Informes</a> </li>
         {% endif %}
-		<li><a   class="texto_entrada_enlaces" href="{% url 'info' %}">Informes</a> </li>
 		<li> <a  class="texto_entrada_enlaces" href="{% url 'tienda' %}">Realizar compra</a></li>
 	</ul>
 {% endblock %}
