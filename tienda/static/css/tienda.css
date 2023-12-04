@@ -360,37 +360,48 @@ flex-direction: row;
   border-radius: 10px;
   box-shadow: 4px 2px 2px black;
   height: 630px;
-  width: 500px;
+  width: 50%;
   padding: 20px;
   margin-top: 20px;
-  margin-left: 700px;
+  margin-left: 470px;
+  display: flex;
+  flex-direction: row;
 
 }
 
 .texto_compra{
   display: flex;
   flex-direction: row;
-  margin-top: 30px;
-  margin-left: 120px;
+  margin-top: 40px;
+  margin-left: 10px;
   padding: 5px;
   text-align: center;
   font-size: 30px;
-
+  position: relative;
 }
 
-.texto_comprar{
-  margin-top: 0px;
-  padding: 5px;
-  text-align: left;
-  font-size: 20px;
-  width: 400px;
-  margin-left: 110px;
-  
-}
 
 .colorRojo{
   color: rgb(223, 130, 69,51);
   font-weight: bold;
+  margin-left: 20px;
+ }
+
+.imagen_colocar{
+  width: auto;
+  height: 300px;
+  margin-right: 100px;
+  margin-top: 150px;
+  margin-left: 50px;
+  position: relative;
+
+}
+
+.imagen_colocar img{
+      width: 90%;
+      height: auto;
+       object-fit: cover;
+
 }
 
 /*----Compra terminada------*/

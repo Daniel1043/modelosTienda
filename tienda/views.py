@@ -6,8 +6,6 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Count, Sum
@@ -39,10 +37,15 @@ def loge_ins(request):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                return_render = redirect(next_ruta)
-                login(request, user)
-                return return_render
-
+                cliente = cliente_check(user)
+                if cliente:
+                    return_render = redirect(next_ruta)
+                    login(request, user)
+                    return return_render
+                else:
+                     return return_render
+        else:
+            return return_render
     else:
         return return_render
 
@@ -195,7 +198,7 @@ def info(request):
 
 
 
-
+#Mostrara los productos más vendidos en la tienda
 @login_required(login_url='loge_ins')
 @staff_member_required
 def producto_top(request):
@@ -206,8 +209,7 @@ def producto_top(request):
 @login_required(login_url='loge_ins')
 @staff_member_required
 def historial_compras(request):
-    cliente = get_object_or_404(Cliente)
-    compras = Compra.objects.all().filter(producto__compra__user_id=cliente).annotate(Count('fecha', distinct=True)).order_by('-fecha')[:10]
+    compras = Compra.objects.all().annotate(Count('fecha', distinct=True)).order_by('-fecha')[:10]
     return render(request, 'tienda/info.html', {'compras': compras})
 
 
