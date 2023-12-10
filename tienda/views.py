@@ -135,7 +135,6 @@ def cliente_check(user):
 
 
 @transaction.atomic #Es un decorador que se utiliza para garantizar que un bloque de código se ejecute en una transacción de base de datos atómica.
-@login_required(login_url='loge_ins')
 def comprarProducto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     if request.method == "POST":
@@ -157,19 +156,19 @@ def comprarProducto(request, pk):
                 cliente.saldo -= compra.importe
                 cliente.save()
                 messages.info(request, "Compra finalizada")
-                return redirect('compraRealizada', pk=compra.pk)
+                return redirect('checkout', pk=compra.pk)
     form = comprasForm()
-    return render(request, 'tienda/checkout.html', {'form': form, 'producto': producto})
+    return render(request, 'tienda/compraProducto.html', {'form': form, 'producto': producto})
 
 
 #Nos mostrara el total gastado en la compra y los datos de ella
 @login_required(login_url='loge_ins')
 @user_passes_test(cliente_check, login_url='loge_ins')
-def compraRealizada(request, pk):
+def checkout(request, pk):
     compra = Compra.objects.get(pk=pk)
     producto = compra.producto
     importe = compra.unidades * producto.precio
-    return render(request, 'tienda/compraTerminada.html', {'producto': producto, 'compra': compra, 'importe': importe})
+    return render(request, 'tienda/checkout.html', {'producto': producto, 'compra': compra, 'importe': importe})
 
 
 
@@ -202,14 +201,14 @@ def info(request):
 @login_required(login_url='loge_ins')
 @staff_member_required
 def producto_top(request):
-    producto_top = Producto.objects.annotate(sum_unidades=Sum('compra__unidades'), sum_importes=Sum('compra__importe')).order_by('-sum_unidades')[:10]
+    producto_top = Producto.objects.annotate(sum_unidades=Sum('compra__unidades'), sum_importes=Sum('compra__importe')).order_by('-sum_unidades')[:10] #annotate() se utiliza para realizar operaciones de agregación en los objetos
     return render(request, 'tienda/info.html', {'producto_top': producto_top})
 
 
 @login_required(login_url='loge_ins')
 @staff_member_required
 def historial_compras(request):
-    compras = Compra.objects.all().annotate(Count('fecha', distinct=True)).order_by('-fecha')[:10]
+    compras = Compra.objects.all().annotate(Count('fecha', distinct=True)).order_by('-fecha')[:10] 
     return render(request, 'tienda/info.html', {'compras': compras})
 
 

@@ -1,38 +1,19 @@
 {% extends 'tienda/base.html' %}
-            		
+
 {% block content %}
 
-    <center> <h1>Comprar Producto</h1></center>
+    <h1>FIN compra</h1>
+        <div class="recuadro_compraFin">
+            <div class="texto_compra_Fin">
+                <div class="fechaCompra"> {{ compra.fecha }} </div>
+                <div class="texto_compra_fin">Precio del producto {{ producto.precio }}€  </div>
+                <div class="texto_compra_fin">Unidades compradas {{ compra.unidades }} </div>
+                <div class="texto_compra_fin">Precio Final {{ importe }}€ </div>
 
-    
-
-    <div class="recuadro_editar">
-        <div class="imagen_colocar"><img src="https://media.game.es/COVERV2/3D_L/V1G/V1GA1C.png"></div>
-
-        <div>
-            <div class="texto_compra">Nombre: <div class="colorRojo"> {{producto.nombre}}</div> </div>
-            <div class="texto_compra">Marca:  <div class="colorRojo">{{producto.marca}}</div></div>
-            <div class="texto_compra"> Modelo:  <div class="colorRojo">{{producto.modelo}}</div></div>
-            <div class="texto_compra"> Unidades:  <div class="colorRojo">{{producto.unidades}}</div></div>
-            <div class="texto_compra"> Precio:  <div class="colorRojo">{{producto.precio}}€</div></div>
-            <br>
-            {% if producto.vip %}
-            <div class="texto_compra"> El producto es vip</div>
-            {% endif %}
-            
-                {% if request.user.is_staff %}
-
-                {% else %}
-                    <center> 
-                        <form method="post">
-                            {% csrf_token %}
-                            <div class="texto_comprar"> Unidades a comprar: {{ form.unidades }}  <button type="submit"  class="button-30">Comprar</button></div>
-                             
-                        </form>
-                    </center>
-                {% endif %}
-          
+            </div>
         </div>
-    </div>
-    
+    <h2>Gracias por su compra</h2>
+
+
+
 {% endblock %}

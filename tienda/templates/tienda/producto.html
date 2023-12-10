@@ -11,7 +11,6 @@
                                 <td class="texto"> Unidades</td>
                                 <td class="texto"> Editar</td>
                                 <td class="texto"> Eliminar</td>
-                                <td class="texto"> Añadir</td>
                             </tr>
                             
 
@@ -30,16 +29,13 @@
                                     </td>
                                 
                                     <td> <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'eliminarProducto' pk=producto.pk %}">Eliminar producto</a> </button></td>
-
-                                    <td> <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'añadirProducto' %}">Añadir producto</a> </button></td>
-                                
-
-                                        
                                          
                              </tr>
                          {% endfor %}
 
                        </table>
+                       <br>
+                       <button type="action" class="button-30"><a  class="texto_entrada_enlaces" href="{% url 'añadirProducto' %}">Añadir producto</a> </button>
 
                         {% endblock %}
            
